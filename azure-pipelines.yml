@@ -1,0 +1,103 @@
+# ASP.NET Core
+# Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+name: 1.0$(Rev:.r)
+
+parameters:
+- name: buildConfig
+  displayName: 'Build Config ?'
+  type: string
+  default: 'Debug'
+  values:
+  - 'Debug'
+  - 'Release'
+- name: image
+  displayName: 'Pool Image ?'
+  default: 'ubuntu-latest'
+  values:
+  - windows-latest
+  - ubuntu-latest
+  - macOS-latest
+
+trigger:
+- none
+
+stages:
+- stage: Build
+  displayName: Build Package
+  jobs:
+    - job: buildNuget
+      displayName: 'Build package'
+      pool:
+        vmImage: ${{parameters.image}}
+      variables:
+        buildConfiguration: ${{parameters.buildConfig}}
+    
+      steps:
+      # Use latest 3.x sdk
+      - task: UseDotNet@2
+        displayName: 'Get latest dot net core 3.x'
+        inputs:
+          packageType: 'sdk'
+          version: '3.x'
+
+      # dotnet restore
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet restore'
+        inputs:
+          command: 'restore'
+          projects: '$(Build.SourcesDirectory)/src/Templating.RiotSPA/Templating.RiotSPA.csproj'
+          feedsToUse: 'select'
+    
+      # create nuget package
+      - script: dotnet pack $(Build.SourcesDirectory)/src/Templating.RiotSPA/Templating.RiotSPA.csproj -o $(Build.ArtifactStagingDirectory) --no-build
+        displayName: 'dotnet pack $(buildConfiguration)'
+      
+      # Publish nuget package
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish nuget package'
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'dropArtifacts'
+          publishLocation: 'Container'
+
+- stage: Deploy
+  displayName: Deploy Package
+  dependsOn: Build
+  jobs:
+    - job: deployNuget
+      displayName: 'Deploy package to feed'
+      pool:
+        vmImage: ${{parameters.image}}
+      variables:
+        buildConfiguration: ${{parameters.buildConfig}}
+        
+      steps:
+      # download artifacts from build stage
+      - download: current
+        artifact: dropArtifacts
+        patterns: '**/*.nupkg'
+        
+      # push to internal nuget feed if debug
+      - ${{ if contains(parameters.buildConfig, 'Debug') }}:
+        - task: NuGetCommand@2
+          displayName: 'Push Nuget Package to internal feed'
+          inputs:
+            command: 'push'
+            packagesToPush: '$(Pipeline.Workspace)/dropArtifacts/**/*.nupkg;!$(Pipeline.Workspace)/dropArtifacts/**/*.symbols.nupkg'
+            nuGetFeedType: 'internal'
+            publishVstsFeed: '63159940-6c78-4dfb-a75d-0c3e3809b8bb/a4cd4193-3005-41d1-9be6-eb1c688aa92d'
+            
+      # Copy nuget package to feed
+      - ${{ if contains(parameters.buildConfig, 'Release') }}:
+        - task: DotNetCoreCLI@2
+          displayName: 'Push Nuget Package to public nuget feed'
+          inputs:
+            command: custom
+            custom: nuget
+            arguments: >
+              push $(Pipeline.Workspace)/dropArtifacts/*.nupkg
+              -s $(NuGetSourceServerUrl)
+              -k $(NuGetSourceServerApiKey)
