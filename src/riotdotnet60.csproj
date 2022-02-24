@@ -41,9 +41,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="$(PackageReadmeFile)" />
-    <None Include="..\..\license.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
-    <None Include="..\..\images\pic3.png" Pack="true" PackagePath="$(PackageIcon)" />
+    <None Include="..\README.md" Pack="true" PackagePath="$(PackageReadmeFile)" />
+    <None Include="..\license.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+    <None Include="..\images\pic3.png" Pack="true" PackagePath="$(PackageIcon)" />
   </ItemGroup>
 
   <ItemGroup>
