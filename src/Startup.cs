@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using VueCliMiddleware;
 
 namespace riotdotnet60
 {
@@ -28,10 +29,7 @@ namespace riotdotnet60
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "riotdotnet60", Version = "v1" });
-            });
+            services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/public");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,11 +38,22 @@ namespace riotdotnet60
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "riotdotnet60 v1"));
+            }
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
 
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
+
+            // NOTE: PRODUCTION uses webpack static files
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+
 
             app.UseRouting();
 
@@ -53,6 +62,20 @@ namespace riotdotnet60
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseVueCli(
+                        npmScript: (System.Diagnostics.Debugger.IsAttached || env.IsDevelopment()) ? "start" : null,
+                        regex: "Project is running at",
+                        forceKill: true
+                     );
+                }
             });
         }
     }
