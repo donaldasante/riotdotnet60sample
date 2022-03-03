@@ -13,10 +13,10 @@ export var storage = {
 
     },
 
-    getPost: function(Component) {
+    getPost: function(Component) {        
         if (Component.props && Component.props.index) {
             for (var i in posts) {
-                if (posts[i].index === Component?.props?.index) {
+                if (Number(posts[i].index) === Number(Component?.props?.index)) {
                     Component.post = posts[i];
                     Component.post.index = i;
                 }
@@ -25,15 +25,19 @@ export var storage = {
     },
 
     delete: function(postParam) {
-        let removedPosts = posts.splice(postParam.index,1);
-        let posts_str = JSON.stringify(removedPosts);
+        posts.splice(postParam.index,1);
+        for (let i =0; i < posts.length;i++)
+        {
+            posts[i].index  = i;
+        }
+        let posts_str = JSON.stringify(posts);
         localStorage.setItem('posts', posts_str);
     },
 
     insert: function(postParam)
     {
-        let lastIndex = posts && posts?.length - 1 > 0?posts.length - 1:0;
-        postParam.index = lastIndex+1;
+        let lastIndex = posts && posts?.length > 0?posts.length:0;
+        postParam.index = Number(lastIndex);
         posts.push(postParam);
         let posts_str = JSON.stringify(posts);
         localStorage.setItem('posts', posts_str);
@@ -41,7 +45,7 @@ export var storage = {
 
     update: function(postParam)
     {
-        posts[postParam.index] = postParam;
+        posts[Number(postParam.index)] = postParam;
         let posts_str = JSON.stringify(posts);
         localStorage.setItem('posts', posts_str);
     }

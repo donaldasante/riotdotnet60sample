@@ -1,5 +1,5 @@
 <post-display>
-    <div class="post">
+    <div if={post && Object.keys(post).length > 0} class="post">
       <h5><a href="/" >Back</a></h5>
        <h3 class="post_title">
          <p>{post.title}</p>        
