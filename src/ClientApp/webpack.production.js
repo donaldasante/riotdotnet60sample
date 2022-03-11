@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const common = require('./webpack.config.js');
 const CssMinimizerPlugin  = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -17,9 +17,6 @@ module.exports = merge(common, {
                 // Use multi-process parallel running to improve the build speed
                 // Default number of concurrent runs: os.cpus().length - 1
                 parallel: true,
-                // Enable file caching
-                cache: true,
-                sourceMap: true,
             }),
         ],
     }

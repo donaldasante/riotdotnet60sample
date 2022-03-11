@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,9 +28,8 @@ namespace riotdotnet60
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
             services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/public");
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +46,7 @@ namespace riotdotnet60
             }
 
             app.UseStaticFiles();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             // NOTE: PRODUCTION uses webpack static files
             if (!env.IsDevelopment())
@@ -62,20 +62,16 @@ namespace riotdotnet60
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseVueCli(
-                        npmScript: (System.Diagnostics.Debugger.IsAttached || env.IsDevelopment()) ? "start" : null,
-                        regex: "Project is running at",
-                        forceKill: true
-                     );
-                }
+                endpoints.MapToVueCliProxy(
+                    "{*path}",
+                    new SpaOptions { SourcePath = "ClientApp" ,StartupTimeout = new TimeSpan(days: 0, hours: 0, minutes: 1, seconds: 30) },
+                    npmScript: (System.Diagnostics.Debugger.IsAttached || env.IsDevelopment()) ? "start" : null,
+                    port: 8080,
+                    regex: "riotSampleBlog",
+                    forceKill: true,
+                    wsl: false
+                 );
             });
         }
     }

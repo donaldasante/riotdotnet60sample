@@ -14,7 +14,6 @@ module.exports = merge(common, {
         compress: true,
         host: '0.0.0.0',
         port: process.env.DEV_SERVER_PORT,
-        https: false,
         hot: true,
         devMiddleware: {
             publicPath: '/',
@@ -23,7 +22,7 @@ module.exports = merge(common, {
         watchFiles: {
             paths: ['src/**/*', 'public/**/*'],
             options: {
-              usePolling: false,
+              usePolling: true,
             },
         },        
         proxy: {
@@ -33,7 +32,6 @@ module.exports = merge(common, {
                 changeOrigin: true
             }
         },
-        static: ['assets'],
         historyApiFallback: true
     }
 
