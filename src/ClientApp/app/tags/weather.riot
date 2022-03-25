@@ -139,12 +139,12 @@
 
         let component = this;
         try {
-          axios.get('/api/weatherforecast').then(function(response)
+          axios.get('/api/weatherforecast/10').then(function(response)
           {
             if (response && response.status && response.status === 200 && (typeof response.data !== 'string'))
             {
               component.update({
-                forecasts: [... response.data],
+                forecasts: [... response.data.forecasts],
                 loading:false,
               })
             }

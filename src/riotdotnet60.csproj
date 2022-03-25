@@ -4,7 +4,8 @@
      <IsPackable>true</IsPackable>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <NoDefaultExcludes>true</NoDefaultExcludes>
-    <EnableDefaultContentItems>false</EnableDefaultContentItems>    
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+	<ContainerDevelopmentMode>Regular</ContainerDevelopmentMode>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -24,6 +25,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageIcon>images\pic1.png</PackageIcon>
+	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -36,6 +38,7 @@
     <VersionPrefix Condition=" '$(BUILD_BUILDNUMBER)' == '' ">$(VersionMajor).$(VersionMinor).$(VersionBuild)-local</VersionPrefix>
     <VersionPrefix Condition=" '$(BUILD_BUILDNUMBER)' != '' And '$(buildConfiguration)' == 'Debug'">$(VersionMajor).$(VersionMinor).$(VersionBuild)-$(BUILD_BUILDNUMBER)-preview</VersionPrefix>
     <VersionPrefix Condition=" '$(buildConfiguration)' == 'Release'">$(VersionMajor).$(VersionMinor).$(VersionBuild)</VersionPrefix>
+    <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -58,23 +61,32 @@
   
 
   <ItemGroup>
-    <Content Remove="Controllers\WeatherForecastController.cs" />
+    <Content Remove="Contracts\Requests\WeatherForecastRequest.cs" />
+    <Content Remove="Contracts\Responses\WeatherForecastResponse.cs" />
+    <Content Remove="Contracts\Responses\WeatherForecastsResponse.cs" />
+    <Content Remove="Endpoints\WeatherForecastEndpoint.cs" />
+    <Content Remove="Mappers\WeatherForecastMapper.cs" />
     <Content Remove="Program.cs" />
-    <Content Remove="Startup.cs" />
+    <Content Remove="Validators\WeatherForecastRetrievalValidator.cs" />
     <Content Remove="WeatherForecast.cs" />
   </ItemGroup>
   
 
   <ItemGroup>
-    <Compile Include="Controllers\WeatherForecastController.cs" />
+    <Compile Include="Contracts\Requests\WeatherForecastRequest.cs" />
+    <Compile Include="Contracts\Responses\WeatherForecastResponse.cs" />
+    <Compile Include="Contracts\Responses\WeatherForecastsResponse.cs" />
+    <Compile Include="Endpoints\WeatherForecastEndpoint.cs" />
+    <Compile Include="Mappers\WeatherForecastMapper.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Startup.cs" />
-    <Compile Include="WeatherForecast.cs" />
+    <Compile Include="Model\WeatherForecast.cs" />
+    <Compile Include="Validators\WeatherForecastRetrievalValidator.cs" />
   </ItemGroup>  
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="VueCliMiddleware" Version="6.0.0" />
+    <PackageReference Include="FastEndpoints" Version="3.10.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="VueCliMiddleware" Version="3.1.2" />
   </ItemGroup>
   
   <ItemGroup>

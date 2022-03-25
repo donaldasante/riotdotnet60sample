@@ -3,7 +3,8 @@
   "authors": "Donald Asante",
   "license": "MIT",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=16.14.0",
+    "npm": ">=8.5"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.development.js",
@@ -46,7 +47,7 @@
   "keywords": [
     "riot.js",
     "webpack",
-    "dotnetcore6x",
-    "riot v6"
+    "dotnetcore v6.x",
+    "riot v6.x"
   ]
 }

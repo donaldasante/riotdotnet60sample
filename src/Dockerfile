@@ -12,10 +12,12 @@ RUN dotnet restore
 # copy everything else and build app
 COPY . .
 WORKDIR /build
-RUN dotnet publish riotdotnet60.csproj -c release -o published --no-cache
+RUN dotnet publish riotdotnet60.csproj -c Release -o published --no-cache
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 COPY --from=build /build/published ./
 ENTRYPOINT ["dotnet", "riotdotnet60.dll"]
