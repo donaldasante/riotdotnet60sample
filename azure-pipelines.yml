@@ -36,23 +36,23 @@ stages:
         buildConfiguration: ${{parameters.buildConfig}}
     
       steps:
-      # Use latest 3.x sdk
+      # Use latest 6.x sdk
       - task: UseDotNet@2
-        displayName: 'Get latest dot net core 3.x'
+        displayName: 'Get latest dot net core 6.x'
         inputs:
           packageType: 'sdk'
-          version: '3.x'
+          version: '6.x'
 
       # dotnet restore
       - task: DotNetCoreCLI@2
         displayName: 'dotnet restore'
         inputs:
           command: 'restore'
-          projects: '$(Build.SourcesDirectory)/src/Templating.RiotSPA/Templating.RiotSPA.csproj'
+          projects: '$(Build.SourcesDirectory)/src/riotdotnet60.csproj'
           feedsToUse: 'select'
     
       # create nuget package
-      - script: dotnet pack $(Build.SourcesDirectory)/src/Templating.RiotSPA/Templating.RiotSPA.csproj -o $(Build.ArtifactStagingDirectory) --no-build
+      - script: dotnet pack $(Build.SourcesDirectory)/src/riotdotnet60.csproj -o $(Build.ArtifactStagingDirectory) --no-build
         displayName: 'dotnet pack $(buildConfiguration)'
       
       # Publish nuget package
@@ -99,5 +99,5 @@ stages:
             custom: nuget
             arguments: >
               push $(Pipeline.Workspace)/dropArtifacts/*.nupkg
-              -s $(NuGetSourceServerUrl)
-              -k $(NuGetSourceServerApiKey)
+              -s $(RiotDotNet60NuGetSourceServerUrl)
+              -k $(RiotDotNet60NuGetSourceServerApiKey)
