@@ -38,10 +38,11 @@ stages:
       steps:
       # Use latest 6.x sdk
       - task: UseDotNet@2
-        displayName: 'Get latest dot net core 6.x'
+        displayName: 'Get latest dot net 6.x'
         inputs:
-          packageType: 'sdk'
           version: '6.x'
+          performMultiLevelLookup: true
+          includePreviewVersions: true
 
       # dotnet restore
       - task: DotNetCoreCLI@2
@@ -52,8 +53,12 @@ stages:
           feedsToUse: 'select'
     
       # create nuget package
-      - script: dotnet pack $(Build.SourcesDirectory)/src/Templating.RiotSPA.csproj -o $(Build.ArtifactStagingDirectory) --no-build
-        displayName: 'dotnet pack $(buildConfiguration)'
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet pack'
+        inputs:
+          command: 'pack'
+          projects: '$(Build.SourcesDirectory)/src/Templating.RiotSPA.csproj'
+          outputDir: '$(Build.ArtifactStagingDirectory)'
       
       # Publish nuget package
       - task: PublishBuildArtifacts@1
