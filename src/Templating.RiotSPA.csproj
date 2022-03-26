@@ -6,6 +6,7 @@
     <NoDefaultExcludes>true</NoDefaultExcludes>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
 	<ContainerDevelopmentMode>Regular</ContainerDevelopmentMode>
+	<EnableStaticWebAssets>false</EnableStaticWebAssets>
   </PropertyGroup>
 
   <PropertyGroup>
