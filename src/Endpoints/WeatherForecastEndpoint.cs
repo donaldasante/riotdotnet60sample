@@ -1,15 +1,15 @@
 ﻿using FastEndpoints;
 using Microsoft.Extensions.Logging;
-using riotdotnet60.Contracts.Requests;
-using riotdotnet60.Contracts.Responses;
-using riotdotnet60.Mappers;
-using riotdotnet60.Model;
+using Templating.RiotSPA.Contracts.Requests;
+using Templating.RiotSPA.Contracts.Responses;
+using Templating.RiotSPA.Mappers;
+using Templating.RiotSPA.Model;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace riotdotnet60.Endpoints
+namespace Templating.RiotSPA.Endpoints
 {
     public class WeatherForecastEndpoint : Endpoint<WeatherForecastRequest,WeatherForecastsResponse, WeatherForecastMapper>
     {

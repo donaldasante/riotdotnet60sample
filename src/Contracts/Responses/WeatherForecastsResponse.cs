@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace riotdotnet60.Contracts.Responses
+namespace Templating.RiotSPA.Contracts.Responses
 {
     public class WeatherForecastsResponse
     {

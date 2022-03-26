@@ -1,7 +1,7 @@
 ﻿using FastEndpoints.Validation;
-using riotdotnet60.Contracts.Requests;
+using Templating.RiotSPA.Contracts.Requests;
 
-namespace riotdotnet60.Validators
+namespace Templating.RiotSPA.Validators
 {
     public class WeatherForecastRetrievalValidator :
         Validator<WeatherForecastRequest>

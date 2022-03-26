@@ -1,4 +1,4 @@
-﻿namespace riotdotnet60.Contracts.Requests
+﻿namespace Templating.RiotSPA.Contracts.Requests
 {
     public class WeatherForecastRequest
     {

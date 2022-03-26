@@ -20,7 +20,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "riotdotnet60": {
+    "Templating.RiotSPA": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

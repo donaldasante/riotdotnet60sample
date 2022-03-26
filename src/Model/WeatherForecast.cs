@@ -1,6 +1,6 @@
 using System;
 
-namespace riotdotnet60.Model
+namespace Templating.RiotSPA.Model
 {
     public class WeatherForecast
     {

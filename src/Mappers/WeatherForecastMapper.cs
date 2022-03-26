@@ -1,9 +1,9 @@
 ﻿using FastEndpoints;
-using riotdotnet60.Contracts.Requests;
-using riotdotnet60.Contracts.Responses;
-using riotdotnet60.Model;
+using Templating.RiotSPA.Contracts.Requests;
+using Templating.RiotSPA.Contracts.Responses;
+using Templating.RiotSPA.Model;
 
-namespace riotdotnet60.Mappers
+namespace Templating.RiotSPA.Mappers
 {
     public class WeatherForecastMapper : Mapper<WeatherForecastRequest, WeatherForecastResponse, WeatherForecast>
     {
