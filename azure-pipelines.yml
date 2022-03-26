@@ -48,11 +48,11 @@ stages:
         displayName: 'dotnet restore'
         inputs:
           command: 'restore'
-          projects: '$(Build.SourcesDirectory)/src/riotdotnet60.csproj'
+          projects: '$(Build.SourcesDirectory)/src/Templating.RiotSPA.csproj'
           feedsToUse: 'select'
     
       # create nuget package
-      - script: dotnet pack $(Build.SourcesDirectory)/src/riotdotnet60.csproj -o $(Build.ArtifactStagingDirectory) --no-build
+      - script: dotnet pack $(Build.SourcesDirectory)/src/Templating.RiotSPA.csproj -o $(Build.ArtifactStagingDirectory) --no-build
         displayName: 'dotnet pack $(buildConfiguration)'
       
       # Publish nuget package
