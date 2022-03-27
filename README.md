@@ -16,14 +16,14 @@ This is a dot net core 6.x web api backend with a [riot js v6.xx](https://riot.j
 - Navigate to your chosen installation folder.
 - Enter the command to install the latest riot.dotnet template on your local PC
 ```bash
-$ dotnet new --install riot.dotnet.six --nuget-source https://api.nuget.org/v3/index.json 
+$ dotnet new --install riot.dotnet.six
 ```
 - The following output is shown
 ![Output of dot net new command](https://raw.githubusercontent.com/donaldasante/riotdotnet60sample/main/images/pic1.png?raw=true "Output of dot net new command")
 
-- To create a new project based off the template. Type dotnet new riot-dotnet31 -n {ProjectName}. 
+- To create a new project based off the template. Type dotnet new riot-dotnet6 -n {ProjectName}. 
 ```bash
-$ dotnet new riot-dotnet60 -n Demo
+$ dotnet new riot-dotnet6 -n Demo
 ```
 
 ## Running the demo project
