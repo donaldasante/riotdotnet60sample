@@ -93,7 +93,7 @@ stages:
             command: 'push'
             packagesToPush: '$(Pipeline.Workspace)/dropArtifacts/**/*.nupkg;!$(Pipeline.Workspace)/dropArtifacts/**/*.symbols.nupkg'
             nuGetFeedType: 'internal'
-            publishVstsFeed: '63159940-6c78-4dfb-a75d-0c3e3809b8bb/a4cd4193-3005-41d1-9be6-eb1c688aa92d'
+            publishVstsFeed: 'riot dot net template/riot.dotnet.six-feed'
             
       # Copy nuget package to feed
       - ${{ if contains(parameters.buildConfig, 'Release') }}:
