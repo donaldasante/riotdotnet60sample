@@ -14,7 +14,7 @@ This is a dot net core 6.x web api backend with a [riot js v6.xx](https://riot.j
 ## Installation
 - Open your favorite CLS (Command Line Shell).
 - Navigate to your chosen installation folder.
-- Enter the command to install the latest riot.dotnet template on your local PC
+- Enter the command to install the latest riot.dotnet template on your local PC.
 ```bash
 $ dotnet new --install riot.dotnet.six
 ```
@@ -31,10 +31,16 @@ $ dotnet new riot-dotnet6 -n Demo
 - Click on the green run button.
 - Assuming all the requirements are met visual studio will
   1. Build the dot net core app.
-  2. Run npm install
-  3. Start the application
+  2. Run npm install.
+  3. Start the application.
+
+## Running demo application in docker (Visual Studio)
+- Open visual studio 2019/ 2022.
+- Change the default launch profile to 'Docker-Prod'.
+![Change launch profile to Docker-Prod](https://raw.githubusercontent.com/donaldasante/riotdotnet60sample/main/images/pic4.png?raw=true "Change launch profile to Docker-Prod")
+- Click the green run button to build the image and run the container.
   
-## Running demo application in docker
+## Running demo application in docker (Command Prompt)
 - Make sure you have docker desktop (Win, Mac, Linux) installed.
 - Open CLS 
 - Goto riot application install folder containing Dockerfile.

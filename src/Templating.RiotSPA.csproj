@@ -32,7 +32,7 @@
   <PropertyGroup>
     <VersionMajor>1</VersionMajor>
     <VersionMinor>0</VersionMinor>
-    <VersionBuild>2</VersionBuild>
+    <VersionBuild>3</VersionBuild>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -72,8 +72,8 @@
   </ItemGroup>  
 
   <ItemGroup>
-    <PackageReference Include="FastEndpoints" Version="3.10.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="FastEndpoints" Version="3.11.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
     <PackageReference Include="VueCliMiddleware" Version="3.1.2" />
   </ItemGroup>
   
