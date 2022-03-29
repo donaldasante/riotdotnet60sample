@@ -1,5 +1,4 @@
-﻿using FastEndpoints;
-using Templating.RiotSPA.Contracts.Requests;
+﻿using Templating.RiotSPA.Contracts.Requests;
 using Templating.RiotSPA.Contracts.Responses;
 using Templating.RiotSPA.Model;
 

@@ -1,10 +1,15 @@
 global using FastEndpoints;
+global using Serilog;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VueCliMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console());
+
 builder.Services.AddSpaStaticFiles(opt => opt.RootPath = "ClientApp/public");
 builder.Services.AddFastEndpoints();
 

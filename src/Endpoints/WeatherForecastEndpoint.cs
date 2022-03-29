@@ -1,5 +1,4 @@
-﻿using FastEndpoints;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Templating.RiotSPA.Contracts.Requests;
 using Templating.RiotSPA.Contracts.Responses;
 using Templating.RiotSPA.Mappers;
@@ -34,7 +33,7 @@ namespace Templating.RiotSPA.Endpoints
 
         public override async Task HandleAsync(WeatherForecastRequest req,CancellationToken ct)
         {
-            _logger.LogDebug("Getting Weather Forecasts");
+            _logger.LogInformation("Getting Weather Forecasts");
 
             var rng = new Random();
             var forecasts =  Enumerable.Range(1, req.Days).Select(index => new WeatherForecast
