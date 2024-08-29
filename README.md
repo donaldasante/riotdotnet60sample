@@ -8,8 +8,8 @@ This is a dot net core 6.x web api backend with a [riot js v6.xx](https://riot.j
 ## Requirements
 - [Visual Studio 2019 or 2022 Community Edition](https://visualstudio.microsoft.com/vs/whatsnew/) .
 - [dot net core 6.x](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).
-- [node js >= version 16.14.0](https://nodejs.org/en/)
-- [npm >= 8.5](https://www.npmjs.com/get-npm) which is normally bundled with nodejs.
+- [node js >= version 20.17.0](https://nodejs.org/en/)
+- [npm >= 10.8.2](https://www.npmjs.com/get-npm) which is normally bundled with nodejs.
 
 ## Installation
 - Open your favorite CLS (Command Line Shell).
@@ -53,3 +53,6 @@ $ docker build -t demo-riot-web-api-img-60 .
 docker run -d -p 5000:80 --name demo-riot-dotnet-ui-60 demo-riot-web-api-img-60
 ```
 - Open any browser and goto http://localhost:5000. If the host port is not 5000 then use the port configured in the previous command.
+
+## Troubleshooting
+- Delete package-lock.json and node_modules folder and run npm install again._

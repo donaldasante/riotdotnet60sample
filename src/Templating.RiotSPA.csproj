@@ -59,6 +59,10 @@
     <Compile Remove="**\*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="clientapp\setupProxy.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <Compile Include="Contracts\Requests\WeatherForecastRequest.cs" />
